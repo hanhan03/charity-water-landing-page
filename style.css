@@ -1,0 +1,250 @@
+/* Charity:Water – Full-bleed final
+   Colors: soft orange #FED8C1 / light blue #77A8BB
+   Font: 'Avenir','Proxima Nova', Arial, sans-serif
+*/
+
+:root{
+  --bg-orange:#FED8C1;
+  --brand-blue:#77A8BB;
+  --text:#222;
+  --white:#fff;
+
+  --radius:14px;
+  --frame-radius:22px;
+
+  --shadow:0 10px 24px rgba(0,0,0,.10);
+  --shadow-soft:0 6px 16px rgba(0,0,0,.08);
+  --inset:inset 0 -2px 0 rgba(0,0,0,.06);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg-orange);
+  font-family:'Avenir','Proxima Nova',Arial,sans-serif;
+  color:var(--text);
+  line-height:1.6;
+}
+
+/* ===== 外框：兩側留白極少 ===== */
+.page-frame{
+  border:3px solid var(--brand-blue);
+  border-radius:var(--frame-radius);
+  margin:8px;                 /* 幾乎貼邊 */
+  background:#fff0;
+  box-shadow:0 8px 24px rgba(0,0,0,.07);
+}
+
+/* ===== Header（加寬、緊湊） ===== */
+header{position:sticky; top:0; z-index:5; background:var(--bg-orange)}
+.nav{
+  margin:0; padding:10px 16px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.brand{display:flex; align-items:center; gap:10px; font-weight:800; font-size:22px; color:#0b2230}
+.brand-badge{
+  width:34px; height:34px; border-radius:50%;
+  display:grid; place-items:center;
+  background:#fbd38d; border:2px solid #e2a900; font-size:18px;
+}
+.donate-btn{
+  background:var(--brand-blue); color:var(--white);
+  padding:8px 14px; border-radius:10px; font-weight:800;
+  border:2px solid rgba(0,0,0,.08);
+  box-shadow:var(--inset); transition:transform .2s;
+}
+.donate-btn:hover{transform:translateY(-2px)}
+.donate-btn:focus-visible{outline:3px solid #0b2230; outline-offset:3px}
+
+/* ===== 一般 section（卡片內容）– 幾乎滿寬 ===== */
+section{
+  background:var(--white);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  margin:16px 10px;           /* 小邊距 */
+  padding:22px 14px;
+  width:calc(100% - 20px);    /* 幾乎貼合 page-frame 內側 */
+}
+
+/* ================= FULL-BLEED 區域 ================= */
+/* HERO：滿寬、左右貼齊、圖片更高、標題在上半部 */
+.hero{
+  position:relative;
+  margin:0; width:100%;
+  border-radius:0; box-shadow:none;
+
+  /* 圖片更大（已放在 /img/hero.png） */
+  min-height:560px;
+  padding:90px clamp(16px,3vw,32px) 60px; /* 上多、下少 → 標題抬高 */
+
+  background-image:url('img/hero.png');
+  background-size:cover;
+  background-position:center right;
+  background-repeat:no-repeat;
+
+  color:#fff; text-align:left; overflow:hidden;
+}
+/* 左→中黑色漸層遮罩（白字可讀 + 構圖像 Canva） */
+.hero::before{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(90deg,
+    rgba(0,0,0,.84) 0%,
+    rgba(0,0,0,.62) 38%,
+    rgba(0,0,0,.22) 60%,
+    rgba(0,0,0,0) 78%);
+  pointer-events:none;
+}
+/* 文字區：直接靠內距，視覺更滿 */
+.hero h1,.hero p{
+  position:relative; z-index:1; max-width:740px; margin:0;
+}
+.hero h1{
+  font-size:clamp(44px,7vw,84px);
+  line-height:1.04; margin:0 0 14px; font-weight:800;
+  letter-spacing:.2px; text-shadow:0 2px 8px rgba(0,0,0,.22);
+}
+.hero p{
+  font-size:clamp(15px,1.8vw,18px);
+  margin:0; text-shadow:0 1px 4px rgba(0,0,0,.18);
+}
+
+/* Info band：滿寬、緊貼 Hero 下緣、左右貼齊 */
+.info-band{
+  width:100%; max-width:none; margin:0; padding:14px 16px;
+  background:var(--brand-blue); color:var(--white);
+  text-align:center; border:none; box-shadow:none; border-radius:0;
+  font-weight:700; letter-spacing:.2px;
+}
+
+/* ================= CTA 膠囊（置中、加寬） ================= */
+.cta-strip{background:transparent; box-shadow:none; padding:0; margin:0 10px}
+.cta-row{
+  width:100%; margin:0 auto; padding:24px 0 8px;
+  display:grid; gap:18px; grid-template-columns:repeat(3,1fr);
+}
+.cta-pill{
+  background:rgba(254,216,193,.65);
+  padding:18px; border-radius:999px;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 10px 20px rgba(0,0,0,.08);
+}
+.cta-pill-inner{
+  background:var(--brand-blue); color:var(--white);
+  border:2px solid rgba(0,0,0,.08);
+  min-width:240px; min-height:56px;
+  padding:16px 26px;
+  font-weight:800; letter-spacing:.2px; text-align:center;
+  border-radius:999px; box-shadow:0 10px 28px rgba(0,0,0,.12);
+  display:flex; align-items:center; justify-content:center;
+  transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+.cta-pill-inner:hover{transform:translateY(-2px); box-shadow:0 16px 36px rgba(0,0,0,.16); filter:saturate(1.05)}
+.cta-pill-inner:focus-visible{outline:3px solid #0b2230; outline-offset:3px}
+
+/* ===== 其他內容 ===== */
+h2{color:var(--brand-blue); font-weight:800; font-size:clamp(20px,2.6vw,28px); margin:0 0 8px}
+.story p{margin:0}
+
+.impact-image{
+  width:100%; max-width:360px; border-radius:12px; margin-bottom:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
+}
+.impact-content{text-align:left}
+
+.call-to-action{
+  background:var(--brand-blue); color:var(--white);
+  text-align:center; padding:30px 20px;
+  border-radius:16px; border:2px solid rgba(0,0,0,.05);
+}
+.donate-button{
+  display:inline-block; background:var(--white); color:#07333E;
+  padding:14px 32px; border-radius:999px; font-weight:800; font-size:1.05rem;
+  text-decoration:none; margin-top:18px; border:2px solid rgba(0,0,0,.06);
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
+  transition:transform .2s, box-shadow .2s;
+}
+.donate-button:hover{transform:translateY(-2px) scale(1.03); box-shadow:0 10px 24px rgba(0,0,0,.18)}
+
+/* ===== Lower-half upgrades ===== */
+/* Stat pills (3 up) */
+.stat-row{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
+  margin-top:14px;
+}
+.stat-pill{
+  background:rgba(254,216,193,.7);
+  border-radius:16px;
+  padding:18px;
+  text-align:center;
+  box-shadow:0 8px 18px rgba(0,0,0,.08);
+  border:1px solid rgba(0,0,0,.04);
+}
+.stat-num{
+  font-weight:800; font-size:clamp(22px,3.2vw,28px);
+  color:#0b2230;
+}
+.stat-label{
+  color:#295563; /* 深藍綠，與 #77A8BB 同系 */
+  font-weight:700; letter-spacing:.2px;
+  margin-top:4px;
+}
+.stat-footnote{
+  font-size:12px; color:#5a6a70; margin-top:6px;
+}
+
+/* Pull-quote card */
+.quote-card{
+  margin:16px 0 0;
+  padding:18px 20px;
+  border-radius:16px;
+  background:#fff;
+  box-shadow:0 10px 22px rgba(0,0,0,.08);
+  border:1px solid rgba(0,0,0,.05);
+}
+.quote-card blockquote{
+  margin:0 0 8px; font-size:clamp(16px,2.2vw,20px);
+  line-height:1.6; font-weight:700; color:#0b2230;
+}
+.quote-card figcaption{
+  font-size:14px; color:#295563; font-weight:700;
+}
+
+/* FAQ (native details/summary) */
+.faq{ margin-top:18px }
+.faq h3{ margin:0 0 8px; color:#295563 }
+.faq details{
+  background:#fff; border:1px solid rgba(0,0,0,.05);
+  border-radius:12px; margin:8px 0; padding:10px 12px;
+  box-shadow:0 6px 14px rgba(0,0,0,.06);
+}
+.faq summary{
+  cursor:pointer; font-weight:700; color:#0b2230; outline:none;
+}
+.faq p{ margin:8px 0 0 }
+
+/* ===== Responsive ===== */
+@media (max-width:900px){
+  .cta-row{grid-template-columns:1fr}
+  .cta-pill-inner{min-width:auto; width:100%}
+}
+@media (max-width:700px){
+  .stat-row{ grid-template-columns:1fr; }  /* stats 在手機改單欄 */
+}
+@media (max-width:600px){
+  .hero{min-height:420px; padding:72px 14px 28px}
+  .hero h1{font-size:36px}
+  .hero p{font-size:14px}
+
+  .impact-content{display:block; text-align:center}
+  .impact-image{width:90%; max-width:220px; margin:0 auto 16px}
+}
+@media (min-width:601px){
+  .impact-content{
+    display:flex; align-items:center; justify-content:center;
+    gap:24px; width:100%;
+  }
+}
+
+/* ===== 細節微調（陰影/圓角更柔和） ===== */
+section{ box-shadow:0 8px 22px rgba(0,0,0,.08); border-radius:16px; }
